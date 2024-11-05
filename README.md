@@ -27,13 +27,13 @@ It takes a single app, which should be the output of the map/reduce job.
 
 An example file is provided in src/main/input/data.txt
 #### From Jar
-```java -jar <jar file> src/main/input/data.txt```
+```java -jar <jar file> <inputdir> <outputdir> ```
 
 #### From sbt
-```sbt run src/main/input/data.txt```
+```sbt run <inputdir> <outputdir>```
 
     A convienient option is to use the intellij provided options as well.
 
 ## Video Presentation
 
-    https://youtu.be/6ZTwJu8VGJg?si=N1s6u-k3hGjrwYZ1
+https://youtu.be/zIbwVT_3o3g
