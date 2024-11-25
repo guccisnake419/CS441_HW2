@@ -27,7 +27,9 @@ import org.nd4j.linalg.api.ops.LossFunction
 import org.nd4j.linalg.lossfunctions.LossFunctions
 import org.nd4j.shade.wstx.util.DataUtil.Integer
 
+import java.io.File
 import java.lang.management.ManagementFactory
+import java.nio.file.{Files, Paths}
 import java.time.LocalDateTime
 import scala.io.Source
 import scala.jdk.CollectionConverters.seqAsJavaListConverter
@@ -179,6 +181,18 @@ object TransformerModel2 {
     // Log Epoch tme
     transformerLogger.info(s"Epoch time: " + (endTime - startTime) + " ms")
 //    // Stop the Spark context after training
+    val modelSaveDirectory = args(1)
+
+        // Ensure the save directory exists; create it if it doesn't
+        val saveDirPath = Paths.get(modelSaveDirectory)
+        if (!Files.exists(saveDirPath)) {
+          Files.createDirectories(saveDirPath)
+        }
+    val modelPath = Paths.get(modelSaveDirectory, "trained_model.zip").toString
+
+
+    val modelFile = new File(modelPath)
+    ModelSerializer.writeModel(model, modelFile, true)
     sc.stop()
 
   }
